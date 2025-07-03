@@ -35,6 +35,16 @@ I also made some small changes to make it feel more real-world, like:
 
 ---
 
+## ✅ Conclusion
+
+This challenge was fun to work on! I focused on keeping the code clean and understandable while following best practices (but not going overboard). Everything is deployable with the AWS Free Tier.
+
+### 🤖 Disclaimer
+
+This solution was developed with the help of official AWS documentation, online references, and AI-assisted tools, used primarily to validate ideas, troubleshoot, and speed up development. All decisions were still reviewed and applied with my own reasoning and intent.
+
+---
+
 ## 🚀 How to Deploy
 
 Make sure you have AWS SAM CLI installed:
