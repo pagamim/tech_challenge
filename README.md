@@ -1,36 +1,43 @@
-# JSON Data API with Weekly Summary
+# 🚀 Technical Challenge – JSON API + Weekly Summary
 
-## 💡 Overview
+This is my solution for the AWS technical assignment. It includes a simple API endpoint to accept JSON data, store it in DynamoDB, and (optionally) create a weekly summary that's saved to S3.
 
-This project sets up a simple REST API on AWS to store incoming JSON payloads in DynamoDB and optionally generate weekly summaries saved to S3.
+---
 
-## 🚀 Features
+## 🛠️ What I Built
 
-- **/submit** API to store JSON entries
-- **DynamoDB** for data storage using on-demand billing
-- **EventBridge + Lambda** to generate weekly summaries
-- **S3** for storing JSON reports
-- **CI/CD** using GitHub Actions and AWS SAM
+- A `POST /submit` API built with AWS Lambda + API Gateway (via AWS SAM).
+- Data is stored in DynamoDB using ISO-formatted timestamps as IDs.
+- Every week, a summary job runs via EventBridge, counts the total items, and stores a report to S3 in JSON format.
 
-## 🧠 Design Rationale
+---
 
-- **SAM (Serverless Application Model):** Simple syntax, works seamlessly with GitHub Actions and supports fast deployments.
-- **DynamoDB PAY_PER_REQUEST:** Chosen to stay inside the free tier and scale without needing to estimate capacity.
-- **ISO Timestamps as IDs:** Helps keep the records sortable while being readable. I considered UUIDs but chose timestamps for debugging clarity.
-- **Environment Variables:** Used for flexibility across environments, e.g., table name or bucket.
+## 🔧 Tech & Tools Used
 
-## 🔄 CI/CD Flow
+- **AWS SAM** – I chose SAM to keep things simple and deployable as a single stack.
+- **DynamoDB** – for fast, serverless storage (using `PAY_PER_REQUEST` to stay in the Free Tier).
+- **S3** – stores the weekly reports.
+- **GitHub Actions** – used for CI/CD to deploy on every `main` push.
 
-- On every push to `main`, the workflow:
-  1. Sets up Python + SAM
-  2. Validates the template
-  3. Builds and deploys the stack to AWS
+---
 
-I used GitHub Actions for simplicity and because it's free, integrated, and suits smaller workflows like this.
+## 🤔 Why I Did It This Way
 
-## 📦 Deployment Instructions
+I focused on simplicity and practicality. I wanted to avoid overengineering but still demonstrate:
+- An API that persists data
+- Basic automation (with EventBridge)
+- A clean, reproducible deployment
 
-Ensure you have the AWS SAM CLI installed locally:
+I also made some small changes to make it feel more real-world, like:
+- Using a timestamp instead of UUID for easier sorting/debugging
+- Separating logic into functions (`persist_data()` etc.)
+- Writing clean, minimal YAML to avoid unnecessary SAM noise
+
+---
+
+## 🚀 How to Deploy
+
+Make sure you have AWS SAM CLI installed:
 
 ```bash
 sam build
